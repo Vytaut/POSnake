@@ -29,6 +29,8 @@ public class Snake {
         return head;
     }
 
-    
+    public void changeOrientation(MapOrientation direction){
+
+    }
 
 }
