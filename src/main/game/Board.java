@@ -14,10 +14,10 @@ public class Board implements ActionListener, KeyListener {
     private Apple apple;
     private Snake snake;
     private JFrame gameFrame = new JFrame("Snake!");
-    private JPanel gamePanel = new JPanel();
+    private JPanel gamePanel;
     public Timer timer = new Timer(20,this);
-    public int scale = 10;
-    private int ticks = 0;
+    public int scale = 20;
+    private int ticks = 0;//niepotrzebne w ogolnym
 
     Board(int width, int height){
         this.upperLeft = new Vector2D(0,0);
@@ -81,11 +81,12 @@ public class Board implements ActionListener, KeyListener {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize(lowerRight.x*scale,lowerRight.y*scale);
+        gameFrame.setSize((lowerRight.x+2)*scale,(lowerRight.y+4)*scale);
         gameFrame.setLocation(
                 (dim.width-gameFrame.getWidth())/2,
                 (dim.height-gameFrame.getHeight())/2
         );
+        gameFrame.setResizable(false);
         gameFrame.setVisible(true);
 
         gamePanel = new BoardVisualizer(this,gameFrame);
