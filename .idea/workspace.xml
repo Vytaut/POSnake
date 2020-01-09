@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="700f4274-a8fc-43f2-ad6e-fdfd2cf0bfc2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/game/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/Snake.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/game/MapVisualizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/game/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/Board.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,16 +17,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/game/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="35" column="100" selection-start-line="35" selection-start-column="100" selection-end-line="35" selection-end-column="100" />
+            <state relative-caret-position="419">
+              <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+              <folding>
+                <element signature="e#1161#1162#0" expanded="true" />
+                <element signature="e#1252#1253#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/game/MapVisualizer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="467">
+              <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/game/Snake.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
@@ -69,10 +83,11 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/game/Vector2D.java" />
         <option value="$PROJECT_DIR$/src/main/game/Apple.java" />
-        <option value="$PROJECT_DIR$/src/main/game/Board.java" />
         <option value="$PROJECT_DIR$/src/main/game/MapDirection.java" />
         <option value="$PROJECT_DIR$/src/main/game/MapOrientation.java" />
         <option value="$PROJECT_DIR$/src/main/game/Snake.java" />
+        <option value="$PROJECT_DIR$/src/main/game/MapVisualizer.java" />
+        <option value="$PROJECT_DIR$/src/main/game/Board.java" />
       </list>
     </option>
   </component>
@@ -152,12 +167,12 @@
       <workItem from="1578298077204" duration="4115000" />
       <workItem from="1578469017910" duration="604000" />
       <workItem from="1578478066872" duration="1537000" />
-      <workItem from="1578555611749" duration="2985000" />
+      <workItem from="1578555611749" duration="3971000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11870000" />
+    <option name="totallyTimeSpent" value="12856000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -242,17 +257,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/game/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="35" column="100" selection-start-line="35" selection-start-column="100" selection-end-line="35" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/game/MapDirection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/game/Snake.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -271,10 +286,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/game/Snake.java">
+    <entry file="file://$PROJECT_DIR$/src/main/game/MapVisualizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+        <state relative-caret-position="467">
+          <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/game/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+          <folding>
+            <element signature="e#1161#1162#0" expanded="true" />
+            <element signature="e#1252#1253#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

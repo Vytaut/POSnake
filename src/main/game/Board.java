@@ -36,4 +36,12 @@ public class Board {
         return this.snake.getHead().follows(lowerLeft) && this.snake.getHead().precedes(upperRight);
     }
 
+    private String gameOver(){
+        return "Game over! Your score is:" + ( this.snake.getBody().size() - 3) + "!";
+    }
+
+    public boolean isOccupied(Vector2D position){
+        
+    }
+
 }
