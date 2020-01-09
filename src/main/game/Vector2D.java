@@ -18,7 +18,7 @@ public class Vector2D extends Point {
     }
 
     public boolean follows(Vector2D position){
-        return this.x <= position.x && this.y <= position.y;
+        return this.x >= position.x && this.y >= position.y;
     }
 
 }
