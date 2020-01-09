@@ -4,13 +4,13 @@ import java.awt.*;
 
 public class Apple {
 
-    private Point position;
+    private Vector2D position;
 
-    Apple(Point position){
+    Apple(Vector2D position){
         this.position = position;
     }
 
-    public Point getPosition() {
+    public Vector2D getPosition() {
         return position;
     }
 

@@ -14,6 +14,7 @@ public class Board implements ActionListener {
     private JFrame gameFrame = new JFrame("Snake!");
     private JPanel gamePanel = new JPanel();
     public Timer timer = new Timer(20,this);
+    public int scale = 10;
 
     Board(int width, int height){
         this.lowerLeft = new Vector2D(0,0);
@@ -66,17 +67,16 @@ public class Board implements ActionListener {
 
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setSize(800,800);
-        gameFrame.setLocation((dim.width-gameFrame.getWidth())/2,(dim.height-gameFrame.getHeight())/2);
-        gameFrame.setLayout(null);
+        gameFrame.setLocation(
+                (dim.width-gameFrame.getWidth())/2,
+                (dim.height-gameFrame.getHeight())/2
+        );
         gameFrame.setVisible(true);
 
-        gamePanel.setBounds(0,0,gameFrame.getWidth(),gameFrame.getHeight());
-        gamePanel.setBackground(Color.black);
+        gamePanel = new BoardVisualizer(this,gameFrame);
         gameFrame.add(gamePanel);
 
         timer.start();
-
-
     }
 
     @Override
