@@ -9,8 +9,8 @@ import java.awt.event.KeyListener;
 
 public class Board implements ActionListener, KeyListener {
 
-    private Vector2D lowerLeft;
-    private Vector2D upperRight;
+    private Vector2D upperLeft;
+    private Vector2D lowerRight;
     private Apple apple;
     private Snake snake;
     private JFrame gameFrame = new JFrame("Snake!");
@@ -20,8 +20,8 @@ public class Board implements ActionListener, KeyListener {
     private int ticks = 0;
 
     Board(int width, int height){
-        this.lowerLeft = new Vector2D(0,0);
-        this.upperRight = new Vector2D(width-1,height-1);
+        this.upperLeft = new Vector2D(0,0);
+        this.lowerRight = new Vector2D(width-1,height-1);
         this.apple = new Apple(new Vector2D(3*height/4,height/2));
         this.snake = new Snake(new Vector2D(width/2,height/2),3);
     }
@@ -39,12 +39,12 @@ public class Board implements ActionListener, KeyListener {
 
         do{
             applePosition = new Vector2D(
-                    (int)(Math.random()*this.upperRight.x),
-                    (int)(Math.random()*this.upperRight.y)
+                    (int)(Math.random()*this.lowerRight.x),
+                    (int)(Math.random()*this.lowerRight.y)
             );
         }while(!(
-                applePosition.follows(lowerLeft) &&
-                applePosition.precedes(upperRight) &&
+                applePosition.follows(upperLeft) &&
+                applePosition.precedes(lowerRight) &&
                 !this.snake.getBody().contains(applePosition)
         ));
 
@@ -52,11 +52,16 @@ public class Board implements ActionListener, KeyListener {
     }
 
     private boolean validateSnakePosition(){
-        return this.snake.getHead().follows(lowerLeft) && this.snake.getHead().precedes(upperRight);
+        return
+                this.snake.getHead().follows(upperLeft) &&
+                this.snake.getHead().precedes(lowerRight) &&
+                !this.snake.getBody().contains(snake.getHead().add(snake.getOrientation().getUnitVector()));
     }
 
     private String gameOver(){
-        return "Game over! Your score is:" + ( this.snake.getBody().size() - 3) + "!";
+        timer.stop();
+
+        return "Game over! Your score is: " + ( this.snake.getBody().size() - 3) + "!";
     }
 
     public boolean isOccupied(Vector2D position){
@@ -76,7 +81,7 @@ public class Board implements ActionListener, KeyListener {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize(upperRight.x*scale,upperRight.y*scale);
+        gameFrame.setSize(lowerRight.x*scale,lowerRight.y*scale);
         gameFrame.setLocation(
                 (dim.width-gameFrame.getWidth())/2,
                 (dim.height-gameFrame.getHeight())/2
@@ -96,13 +101,18 @@ public class Board implements ActionListener, KeyListener {
         ticks++;
 
         if(ticks%5 == 0){
-            snake.move(
-                    snake.getOrientation(),
-                    snakeEats()
-            );
+            if(validateSnakePosition()){
+                snake.move(
+                        snake.getOrientation(),
+                        snakeEats()
+                );
+            }
+            else{
+                System.out.print(gameOver());
+            }
         }
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
