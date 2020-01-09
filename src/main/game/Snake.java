@@ -37,6 +37,7 @@ public class Snake {
     }
 
     public void move(MapOrientation direction, boolean hasEaten){
+        //TODO: delete direction from this function and replace it with internal call
         Vector2D newHead = getHead().add(direction.getUnitVector());
 
         body.addFirst(newHead);
@@ -45,6 +46,10 @@ public class Snake {
         }
 
         orientation = direction;
+    }
+
+    public void changeOrientation(MapOrientation direction){
+        this.orientation = direction;
     }
 
 }

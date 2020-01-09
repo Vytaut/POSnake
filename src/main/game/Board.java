@@ -64,7 +64,11 @@ public class Board implements ActionListener, KeyListener {
     }
 
     private boolean snakeEats(){
-        return snake.getHead().add(snake.getOrientation().getUnitVector()).equals(apple.getPosition());
+        boolean eats = snake.getHead().add(snake.getOrientation().getUnitVector()).equals(apple.getPosition());
+
+        if(eats) generateApple();
+
+        return eats;
     }
 
     public void run(){
@@ -81,6 +85,7 @@ public class Board implements ActionListener, KeyListener {
 
         gamePanel = new BoardVisualizer(this,gameFrame);
         gameFrame.add(gamePanel);
+        gameFrame.addKeyListener(this);
 
         timer.start();
     }
@@ -90,21 +95,28 @@ public class Board implements ActionListener, KeyListener {
         gamePanel.repaint();
         ticks++;
 
-        if(ticks%10 == 0){
-            if(snakeEats()){
-                generateApple();
-            }
+        if(ticks%5 == 0){
             snake.move(
                     snake.getOrientation(),
                     snakeEats()
             );
         }
     }
-
-
+    
     @Override
     public void keyPressed(KeyEvent e) {
-        
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
+                snake.changeOrientation(snake.getOrientation().getPrevious());
+                break;
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
+                snake.changeOrientation(snake.getOrientation().getNext());
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
