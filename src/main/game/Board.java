@@ -10,7 +10,7 @@ public class Board {
     Board(int width, int height){
         this.lowerLeft = new Vector2D(0,0);
         this.upperRight = new Vector2D(width-1,height-1);
-        this.apple = new Apple(new Vector2D((3/4)*width,(1/2)*height));
+        this.apple = new Apple(new Vector2D(3*height/4,height/2));
         this.snake = new Snake(new Vector2D(width/2,height/2),3);
     }
 
@@ -53,7 +53,7 @@ public class Board {
     }
 
     public void run(){
-        
+
     }
 
 }

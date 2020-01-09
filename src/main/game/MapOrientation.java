@@ -1,19 +1,31 @@
 package main.game;
 
 public enum MapOrientation {
-    UP (new Vector2D(0,1),MapOrientation.values()[1],MapOrientation.values()[3]),
-    RIGHT (new Vector2D(1,0),MapOrientation.values()[2],MapOrientation.values()[0]),
-    DOWN (new Vector2D(0,-1),MapOrientation.values()[3],MapOrientation.values()[1]),
-    LEFT (new Vector2D(-1,0),MapOrientation.values()[0],MapOrientation.values()[2]);
+    UP (new Vector2D(0,1)),
+    RIGHT (new Vector2D(1,0)),
+    DOWN (new Vector2D(0,-1)),
+    LEFT (new Vector2D(-1,0));
 
     private final Vector2D unitVector;
-    private final MapOrientation next;
-    private final MapOrientation previous;
+    private MapOrientation next;
+    private MapOrientation previous;
 
-    MapOrientation(Vector2D vector, MapOrientation next, MapOrientation previous){
+    static {
+        UP.next = RIGHT;
+        RIGHT.next = DOWN;
+        DOWN.next = LEFT;
+        LEFT.next = UP;
+    }
+
+    static {
+        UP.previous = LEFT;
+        RIGHT.previous = UP;
+        DOWN.previous = RIGHT;
+        LEFT.previous = DOWN;
+    }
+
+    MapOrientation(Vector2D vector){
         this.unitVector = vector;
-        this.next = next;
-        this.previous = previous;
     }
 
     public MapOrientation getNext() {

@@ -9,6 +9,7 @@ public class Snake {
 
     Snake(Vector2D position,int length){
         this.orientation = MapOrientation.RIGHT;
+        this.body = new LinkedList<>();
 
         for(int i=0;i<length;i++){
             body.add(new Vector2D(position.getX()-i,position.getY()));
