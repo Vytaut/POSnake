@@ -29,6 +29,11 @@ public class Snake {
 
     public Vector2D getTail() { return body.getLast(); }
 
+    @Override
+    public String toString() {
+        return "s";
+    }
+
     public void move(MapOrientation direction, boolean hasEaten){
         Vector2D newHead = getHead().add(direction.getUnitVector());
 

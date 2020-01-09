@@ -14,6 +14,6 @@ public class Apple {
 
     @Override
     public String toString() {
-        return "o";
+        return "a";
     }
 }

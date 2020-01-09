@@ -11,7 +11,15 @@ public class Board {
         this.lowerLeft = new Vector2D(0,0);
         this.upperRight = new Vector2D(width-1,height-1);
         this.apple = new Apple(new Vector2D((3/4)*width,(1/2)*height));
-        //this.snake
+        this.snake = new Snake(new Vector2D(width/2,height/2),3);
+    }
+
+    public Apple getApple() {
+        return apple;
+    }
+
+    public Snake getSnake() {
+        return snake;
     }
 
     private void generateApple(){
@@ -41,6 +49,10 @@ public class Board {
     }
 
     public boolean isOccupied(Vector2D position){
+        return apple.getPosition().equals(position) || snake.getBody().contains(position);
+    }
+
+    public void run(){
         
     }
 

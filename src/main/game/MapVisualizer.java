@@ -61,16 +61,16 @@ public class MapVisualizer {
 
     private String drawObject(Vector2D currentPosition) {
         String result = null;
-        if (this.board.isOccupied(currentPosition)) {
-            Object object = this.board.animalsAt(currentPosition);
+        if (this.board.getApple().getPosition().equals(currentPosition)) {
+            Object object = this.board.getApple();
             if (object != null) {
                 result = object.toString();
             } else {
                 result = EMPTY_CELL;
             }
         } else {
-            if(this.board.grassAt(currentPosition)!=null){
-                Object object = this.board.grassAt(currentPosition);
+            if(this.board.getSnake().getBody().contains(currentPosition)){
+                Object object = this.board.getSnake();
                 result = object.toString();
             }
             else{
