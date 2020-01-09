@@ -1,50 +1,31 @@
 package main.game;
 
 public enum MapOrientation {
-    UP,RIGHT,DOWN,LEFT;
+    UP (new Vector2D(0,1),MapOrientation.values()[1],MapOrientation.values()[3]),
+    RIGHT (new Vector2D(1,0),MapOrientation.values()[2],MapOrientation.values()[0]),
+    DOWN (new Vector2D(0,-1),MapOrientation.values()[3],MapOrientation.values()[1]),
+    LEFT (new Vector2D(-1,0),MapOrientation.values()[0],MapOrientation.values()[2]);
 
-    public Vector2D toUnitVector(){
-        switch (this){
-            case UP:
-                return new Vector2D(0,1);
-            case RIGHT:
-                return new Vector2D(1,0);
-            case DOWN:
-                return new Vector2D(0,-1);
-            case LEFT:
-                return new Vector2D(-1,0);
-            default:
-                throw new IllegalArgumentException("Enum cannot be converted to unit vector");
-        }
+    private final Vector2D unitVector;
+    private final MapOrientation next;
+    private final MapOrientation previous;
+
+    MapOrientation(Vector2D vector, MapOrientation next, MapOrientation previous){
+        this.unitVector = vector;
+        this.next = next;
+        this.previous = previous;
     }
 
-    public MapOrientation next(){
-        switch (this){
-            case UP:
-                return RIGHT;
-            case RIGHT:
-                return DOWN;
-            case DOWN:
-                return LEFT;
-            case LEFT:
-                return UP;
-            default:
-                throw new IllegalArgumentException("Invalid enum");
-        }
+    public MapOrientation getNext() {
+        return next;
     }
 
-    public MapOrientation previous(){
-        switch (this){
-            case UP:
-                return LEFT;
-            case RIGHT:
-                return UP;
-            case DOWN:
-                return RIGHT;
-            case LEFT:
-                return DOWN;
-            default:
-                throw new IllegalArgumentException("Invalid enum");
-        }
+    public MapOrientation getPrevious() {
+        return previous;
     }
+
+    public Vector2D getUnitVector() {
+        return unitVector;
+    }
+
 }
