@@ -1,23 +1,21 @@
 package main.game;
 
-import java.util.HashSet;
+import java.util.LinkedList;
 
 public class Snake {
 
-    private Vector2D head;
-    private HashSet<Vector2D> body;
+    private LinkedList<Vector2D> body;
     private MapOrientation orientation;
 
     Snake(Vector2D position,int length){
-        this.head = position;
         this.orientation = MapOrientation.RIGHT;
 
-        for(int i=1;i<length;i++){
+        for(int i=0;i<length;i++){
             body.add(new Vector2D(position.getX()-i,position.getY()));
         }
     }
 
-    public HashSet<Vector2D> getBody() {
+    public LinkedList<Vector2D> getBody() {
         return body;
     }
 
@@ -26,11 +24,20 @@ public class Snake {
     }
 
     public Vector2D getHead() {
-        return head;
+        return body.getFirst();
     }
 
-    public void changeOrientation(MapOrientation direction){
+    public Vector2D getTail() { return body.getLast(); }
 
+    public void move(MapOrientation direction, boolean hasEaten){
+        Vector2D newHead = getHead().add(direction.getUnitVector());
+
+        body.addFirst(newHead);
+        if(!hasEaten){
+            body.removeLast();
+        }
+
+        orientation = direction;
     }
 
 }
