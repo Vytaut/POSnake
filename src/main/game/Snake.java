@@ -1,5 +1,6 @@
 package main.game;
 
+import java.awt.*;
 import java.util.LinkedList;
 
 public class Snake {
@@ -12,7 +13,7 @@ public class Snake {
         this.body = new LinkedList<>();
 
         for(int i=0;i<length;i++){
-            body.add(new Vector2D(position.getX()-i,position.getY()));
+            body.add(new Vector2D(position.x-i,position.y));
         }
     }
 

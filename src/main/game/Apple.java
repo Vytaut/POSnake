@@ -1,14 +1,16 @@
 package main.game;
 
+import java.awt.*;
+
 public class Apple {
 
-    private Vector2D position;
+    private Point position;
 
-    Apple(Vector2D position){
+    Apple(Point position){
         this.position = position;
     }
 
-    public Vector2D getPosition() {
+    public Point getPosition() {
         return position;
     }
 

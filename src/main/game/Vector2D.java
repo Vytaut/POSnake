@@ -1,21 +1,12 @@
 package main.game;
 
-public class Vector2D {
+import java.awt.*;
 
-    private final int x;
-    private final int y;
+public class Vector2D extends Point {
 
     Vector2D(int x,int y){
         this.x = x;
         this.y = y;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getX() {
-        return x;
     }
 
     public Vector2D add(Vector2D position){

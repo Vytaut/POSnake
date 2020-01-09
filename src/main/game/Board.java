@@ -1,11 +1,19 @@
 package main.game;
 
-public class Board {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Board implements ActionListener {
 
     private Vector2D lowerLeft;
     private Vector2D upperRight;
     private Apple apple;
     private Snake snake;
+    private JFrame gameFrame = new JFrame("Snake!");
+    private JPanel gamePanel = new JPanel();
+    public Timer timer = new Timer(20,this);
 
     Board(int width, int height){
         this.lowerLeft = new Vector2D(0,0);
@@ -53,7 +61,26 @@ public class Board {
     }
 
     public void run(){
+        //TODO: gameframe into seperate function
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setSize(800,800);
+        gameFrame.setLocation((dim.width-gameFrame.getWidth())/2,(dim.height-gameFrame.getHeight())/2);
+        gameFrame.setLayout(null);
+        gameFrame.setVisible(true);
+
+        gamePanel.setBounds(0,0,gameFrame.getWidth(),gameFrame.getHeight());
+        gamePanel.setBackground(Color.black);
+        gameFrame.add(gamePanel);
+
+        timer.start();
+
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        gamePanel.repaint();
+    }
 }
