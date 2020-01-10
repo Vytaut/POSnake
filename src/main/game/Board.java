@@ -53,11 +53,11 @@ public class Board implements ActionListener, KeyListener {
         this.apple = new Apple(applePosition);
     }
 
-    private boolean validateSnakePosition(){
+    private boolean validatePosition(Vector2D position){
         return
-                this.snake.getHead().follows(upperLeft) &&
-                this.snake.getHead().precedes(lowerRight) &&
-                !this.snake.getBody().contains(snake.getHead().add(snake.getOrientation().getUnitVector()));
+                position.follows(upperLeft) &&
+                position.precedes(lowerRight) &&
+                !this.snake.getBody().contains(position);
     }
 
     private String gameOver(){
@@ -108,9 +108,10 @@ public class Board implements ActionListener, KeyListener {
         ticks++;
 
         if(ticks%5 == 0){
-            snake.move(snakeEats());
-
-            if(!validateSnakePosition()){
+            if(validatePosition(snake.getHead().add(snake.getOrientation().getUnitVector()))){
+                snake.move(snakeEats());
+            }
+            else{
                 System.out.println(gameOver());
             }
 
