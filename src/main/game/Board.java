@@ -120,8 +120,6 @@ public class Board implements ActionListener, KeyListener {
         gameFrame.getContentPane().add(gamePanel);
         gameFrame.pack();
         gameFrame.addKeyListener(this);
-
-        timer.start();
     }
 
     @Override
@@ -144,11 +142,15 @@ public class Board implements ActionListener, KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                snake.changeOrientation(snake.getOrientation().getNext());
+                if(timer.isRunning()){
+                    snake.changeOrientation(snake.getOrientation().getNext());
+                }
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
-                snake.changeOrientation(snake.getOrientation().getPrevious());
+                if(timer.isRunning()){
+                    snake.changeOrientation(snake.getOrientation().getPrevious());
+                }
                 break;
             case KeyEvent.VK_SPACE:
                 if(timer.isRunning()){

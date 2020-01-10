@@ -65,8 +65,9 @@ public class SnakeGame {
             }
         }while(speed == 0);
 
-
         Board board = new Board(boardSize,boardSize,scale,wallElements, speed);
+
+        System.out.println("Level setup. Press space to start.");
 
         board.run();
     }

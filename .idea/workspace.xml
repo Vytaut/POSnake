@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="700f4274-a8fc-43f2-ad6e-fdfd2cf0bfc2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/game/Apple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/Apple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/game/BoardVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/BoardVisualizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/SnakeGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/SnakeGame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/game/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="131" column="22" selection-start-line="131" selection-start-column="22" selection-end-line="131" selection-end-column="22" />
+            <state relative-caret-position="179">
+              <caret line="150" column="38" selection-start-line="150" selection-start-column="38" selection-end-line="150" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#keyTyped#0;class#Board#0" />
@@ -64,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/game/SnakeGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="944">
-              <caret line="59" column="57" selection-start-line="59" selection-start-column="57" selection-end-line="59" selection-end-column="57" />
+            <state relative-caret-position="1152">
+              <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -213,12 +210,12 @@
       <workItem from="1578555611749" duration="4065000" />
       <workItem from="1578572503862" duration="15841000" />
       <workItem from="1578651329978" duration="11047000" />
-      <workItem from="1578681294320" duration="1265000" />
+      <workItem from="1578681294320" duration="1649000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41103000" />
+    <option name="totallyTimeSpent" value="41487000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -231,6 +228,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16275303" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -314,22 +312,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/game/SnakeGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1152">
+          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/game/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="131" column="22" selection-start-line="131" selection-start-column="22" selection-end-line="131" selection-end-column="22" />
+        <state relative-caret-position="179">
+          <caret line="150" column="38" selection-start-line="150" selection-start-column="38" selection-end-line="150" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#keyTyped#0;class#Board#0" />
             <element signature="method#keyReleased#0;class#Board#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/game/SnakeGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="944">
-          <caret line="59" column="57" selection-start-line="59" selection-start-column="57" selection-end-line="59" selection-end-column="57" />
         </state>
       </provider>
     </entry>
