@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
 
 public class Board implements ActionListener, KeyListener {
 
@@ -13,14 +14,16 @@ public class Board implements ActionListener, KeyListener {
     private Vector2D lowerRight;
     private Apple apple;
     private Snake snake;
+    private LinkedList<Vector2D> wall;
     private int scale;
 
     private JFrame gameFrame;
     private JPanel gamePanel;
     private Timer timer;
+    private int speed;
     private int ticks;
 
-    Board(int width, int height, int scale){
+    Board(int width, int height, int scale, int wallElementsCount, int speed){
         this.upperLeft = new Vector2D(0,0);
         this.lowerRight = new Vector2D(width-1,height-1);
 
@@ -28,9 +31,15 @@ public class Board implements ActionListener, KeyListener {
 
         this.apple = new Apple(new Vector2D(3*height/4,height/2));
         this.snake = new Snake(new Vector2D(width/2,height/2),3);
+        this.wall = new LinkedList<>();
+
+        for(int i = 0; i<wallElementsCount; i++){
+            generateObject('w');
+        }
 
         this.timer = new Timer(20,this);
         this.ticks = 0;
+        this.speed = speed;
     }
 
     public Apple getApple() {
@@ -45,28 +54,49 @@ public class Board implements ActionListener, KeyListener {
         return scale;
     }
 
-    private void generateApple(){
-        Vector2D applePosition;
+    public LinkedList<Vector2D> getWall() {
+        return wall;
+    }
+
+    private void generateObject(char objectType){
+        Vector2D position;
 
         do{
-            applePosition = new Vector2D(
+            position = new Vector2D(
                     (int)(Math.random()*this.lowerRight.x),
                     (int)(Math.random()*this.lowerRight.y)
             );
         }while(!(
-                applePosition.follows(upperLeft) &&
-                applePosition.precedes(lowerRight) &&
-                !this.snake.getBody().contains(applePosition)
+                position.follows(upperLeft) &&
+                position.precedes(lowerRight) &&
+                !isOccupied(position)
         ));
 
-        this.apple = new Apple(applePosition);
+        switch (objectType) {
+            case 'a':
+                apple = new Apple(position);
+                break;
+            case 'w':
+                wall.add(position);
+                break;
+            default:
+                break;
+        }
     }
 
     private boolean validatePosition(Vector2D position){
         return
                 position.follows(upperLeft) &&
                 position.precedes(lowerRight) &&
-                !this.snake.getBody().contains(position);
+                !this.snake.getBody().contains(position) &&
+                !this.wall.contains(position);
+    }
+
+    private boolean isOccupied(Vector2D position){
+         return
+                 snake.getBody().contains(position) ||
+                 apple.getPosition().equals(position) ||
+                 wall.contains(position);
     }
 
     private String gameOver(){
@@ -78,7 +108,7 @@ public class Board implements ActionListener, KeyListener {
     private boolean snakeEats(){
         boolean eats = snake.getHead().add(snake.getOrientation().getUnitVector()).equals(apple.getPosition());
 
-        if(eats) generateApple();
+        if(eats) generateObject('a');
 
         return eats;
     }
@@ -99,15 +129,13 @@ public class Board implements ActionListener, KeyListener {
         gamePanel.repaint();
         ticks++;
 
-        if(ticks%5 == 0){
+        if(ticks%speed == 0){
             if(validatePosition(snake.getHead().add(snake.getOrientation().getUnitVector()))){
                 snake.move(snakeEats());
             }
             else{
                 System.out.println(gameOver());
             }
-
-            System.out.println(snake.getHead().x + ", " +snake.getHead().y);
         }
     }
 
@@ -131,8 +159,15 @@ public class Board implements ActionListener, KeyListener {
                 }
                 break;
             case KeyEvent.VK_R:
-                this.apple = new Apple(new Vector2D(3*lowerRight.x/4,lowerRight.y/2));
-                this.snake = new Snake(new Vector2D(lowerRight.x/2,lowerRight.y/2),3);
+                apple = new Apple(new Vector2D(3*lowerRight.x/4,lowerRight.y/2));
+                snake = new Snake(new Vector2D(lowerRight.x/2,lowerRight.y/2),3);
+
+                int wallCount = wall.size();
+                wall = new LinkedList<>();
+                for(int i=0;i<wallCount;i++){
+                    generateObject('w');
+                }
+
                 timer.restart();
                 break;
             default:

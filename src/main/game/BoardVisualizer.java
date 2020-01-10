@@ -22,10 +22,20 @@ public class BoardVisualizer extends JPanel {
         g.fillRect(0,0,frame.getWidth(),frame.getHeight());
 
         g.setColor(Color.green);
-        for(Point snakeElement : board.getSnake().getBody()){
+        for(Vector2D snakeElement : board.getSnake().getBody()){
             g.fillRect(
                     snakeElement.x * board.getScale(),
                     snakeElement.y * board.getScale(),
+                    board.getScale(),
+                    board.getScale()
+            );
+        }
+
+        g.setColor(Color.gray);
+        for(Vector2D wallElement : board.getWall()){
+            g.fillRect(
+                    wallElement.x * board.getScale(),
+                    wallElement.y * board.getScale(),
                     board.getScale(),
                     board.getScale()
             );

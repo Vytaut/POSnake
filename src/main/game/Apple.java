@@ -13,9 +13,4 @@ public class Apple {
     public Vector2D getPosition() {
         return position;
     }
-
-    @Override
-    public String toString() {
-        return "a";
-    }
 }
