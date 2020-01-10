@@ -29,23 +29,14 @@ public class Snake {
         return body.getFirst();
     }
 
-    public Vector2D getTail() { return body.getLast(); }
-
-    @Override
-    public String toString() {
-        return "s";
-    }
-
-    public void move(MapOrientation direction, boolean hasEaten){
+    public void move(boolean hasEaten){
         //TODO: delete direction from this function and replace it with internal call
-        Vector2D newHead = getHead().add(direction.getUnitVector());
+        Vector2D newHead = getHead().add(orientation.getUnitVector());
 
         body.addFirst(newHead);
         if(!hasEaten){
             body.removeLast();
         }
-
-        orientation = direction;
     }
 
     public void changeOrientation(MapOrientation direction){

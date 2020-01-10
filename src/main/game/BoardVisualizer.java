@@ -11,6 +11,7 @@ public class BoardVisualizer extends JPanel {
     BoardVisualizer(Board board, JFrame frame){
         this.frame = frame;
         this.board = board;
+        this.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
     }
 
     @Override

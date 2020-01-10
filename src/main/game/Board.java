@@ -13,15 +13,17 @@ public class Board implements ActionListener, KeyListener {
     private Vector2D lowerRight;
     private Apple apple;
     private Snake snake;
+    public int scale;
+
     private JFrame gameFrame = new JFrame("Snake!");
     private JPanel gamePanel;
     public Timer timer = new Timer(20,this);
-    public int scale = 20;
-    private int ticks = 0;//niepotrzebne w ogolnym
+    private int ticks = 0;
 
-    Board(int width, int height){
+    Board(int width, int height, int scale){
         this.upperLeft = new Vector2D(0,0);
         this.lowerRight = new Vector2D(width-1,height-1);
+        this.scale = scale;
         this.apple = new Apple(new Vector2D(3*height/4,height/2));
         this.snake = new Snake(new Vector2D(width/2,height/2),3);
     }
@@ -81,7 +83,10 @@ public class Board implements ActionListener, KeyListener {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize((lowerRight.x+2)*scale,(lowerRight.y+4)*scale);
+        gameFrame.setSize(
+                (lowerRight.x+1)*scale+gameFrame.getInsets().left+gameFrame.getInsets().right,
+                (lowerRight.y+1)*scale+gameFrame.getInsets().top+gameFrame.getInsets().bottom
+        );
         gameFrame.setLocation(
                 (dim.width-gameFrame.getWidth())/2,
                 (dim.height-gameFrame.getHeight())/2
@@ -90,7 +95,8 @@ public class Board implements ActionListener, KeyListener {
         gameFrame.setVisible(true);
 
         gamePanel = new BoardVisualizer(this,gameFrame);
-        gameFrame.add(gamePanel);
+        gameFrame.getContentPane().add(gamePanel);
+        gameFrame.pack();
         gameFrame.addKeyListener(this);
 
         timer.start();
@@ -102,15 +108,13 @@ public class Board implements ActionListener, KeyListener {
         ticks++;
 
         if(ticks%5 == 0){
-            if(validateSnakePosition()){
-                snake.move(
-                        snake.getOrientation(),
-                        snakeEats()
-                );
+            snake.move(snakeEats());
+
+            if(!validateSnakePosition()){
+                System.out.println(gameOver());
             }
-            else{
-                System.out.print(gameOver());
-            }
+
+            System.out.println(snake.getHead().x + ", " +snake.getHead().y);
         }
     }
 
@@ -119,15 +123,29 @@ public class Board implements ActionListener, KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                snake.changeOrientation(snake.getOrientation().getPrevious());
+                snake.changeOrientation(snake.getOrientation().getNext());
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
-                snake.changeOrientation(snake.getOrientation().getNext());
+                snake.changeOrientation(snake.getOrientation().getPrevious());
+                break;
+            case KeyEvent.VK_SPACE:
+                if(timer.isRunning()){
+                    timer.stop();
+                }
+                else{
+                    timer.start();
+                }
+                break;
+            case KeyEvent.VK_R:
+                this.apple = new Apple(new Vector2D(3*lowerRight.x/4,lowerRight.y/2));
+                this.snake = new Snake(new Vector2D(lowerRight.x/2,lowerRight.y/2),3);
+                timer.restart();
                 break;
             default:
                 break;
         }
+        ticks = 4;
     }
 
     @Override
