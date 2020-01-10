@@ -13,19 +13,24 @@ public class Board implements ActionListener, KeyListener {
     private Vector2D lowerRight;
     private Apple apple;
     private Snake snake;
-    public int scale;
+    private int scale;
 
-    private JFrame gameFrame = new JFrame("Snake!");
+    private JFrame gameFrame;
     private JPanel gamePanel;
-    public Timer timer = new Timer(20,this);
-    private int ticks = 0;
+    private Timer timer;
+    private int ticks;
 
     Board(int width, int height, int scale){
         this.upperLeft = new Vector2D(0,0);
         this.lowerRight = new Vector2D(width-1,height-1);
+
         this.scale = scale;
+
         this.apple = new Apple(new Vector2D(3*height/4,height/2));
         this.snake = new Snake(new Vector2D(width/2,height/2),3);
+
+        this.timer = new Timer(20,this);
+        this.ticks = 0;
     }
 
     public Apple getApple() {
@@ -34,6 +39,10 @@ public class Board implements ActionListener, KeyListener {
 
     public Snake getSnake() {
         return snake;
+    }
+
+    public int getScale() {
+        return scale;
     }
 
     private void generateApple(){
@@ -66,10 +75,6 @@ public class Board implements ActionListener, KeyListener {
         return "Game over! Your score is: " + ( this.snake.getBody().size() - 3) + "!";
     }
 
-    public boolean isOccupied(Vector2D position){
-        return apple.getPosition().equals(position) || snake.getBody().contains(position);
-    }
-
     private boolean snakeEats(){
         boolean eats = snake.getHead().add(snake.getOrientation().getUnitVector()).equals(apple.getPosition());
 
@@ -79,22 +84,9 @@ public class Board implements ActionListener, KeyListener {
     }
 
     public void run(){
-        //TODO: gameframe into seperate function
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize(
-                (lowerRight.x+1)*scale+gameFrame.getInsets().left+gameFrame.getInsets().right,
-                (lowerRight.y+1)*scale+gameFrame.getInsets().top+gameFrame.getInsets().bottom
-        );
-        gameFrame.setLocation(
-                (dim.width-gameFrame.getWidth())/2,
-                (dim.height-gameFrame.getHeight())/2
-        );
-        gameFrame.setResizable(false);
-        gameFrame.setVisible(true);
-
+        gameFrame = setupFrame();
         gamePanel = new BoardVisualizer(this,gameFrame);
+
         gameFrame.getContentPane().add(gamePanel);
         gameFrame.pack();
         gameFrame.addKeyListener(this);
@@ -147,6 +139,26 @@ public class Board implements ActionListener, KeyListener {
                 break;
         }
         ticks = 4;
+    }
+
+    private JFrame setupFrame(){
+        JFrame frame = new JFrame("Snake");
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(
+                (lowerRight.x+1)*scale+frame.getInsets().left+frame.getInsets().right,
+                (lowerRight.y+1)*scale+frame.getInsets().top+frame.getInsets().bottom
+        );
+        frame.setLocation(
+                (dim.width-frame.getWidth())/2,
+                (dim.height-frame.getHeight())/2
+        );
+        frame.setResizable(false);
+        frame.setVisible(true);
+
+        return frame;
     }
 
     @Override

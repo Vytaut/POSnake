@@ -24,19 +24,19 @@ public class BoardVisualizer extends JPanel {
         g.setColor(Color.green);
         for(Point snakeElement : board.getSnake().getBody()){
             g.fillRect(
-                    snakeElement.x * board.scale,
-                    snakeElement.y * board.scale,
-                    board.scale,
-                    board.scale
+                    snakeElement.x * board.getScale(),
+                    snakeElement.y * board.getScale(),
+                    board.getScale(),
+                    board.getScale()
             );
         }
 
         g.setColor(Color.red);
         g.fillRect(
-                board.getApple().getPosition().x*board.scale,
-                board.getApple().getPosition().y*board.scale,
-                board.scale,
-                board.scale
+                board.getApple().getPosition().x*board.getScale(),
+                board.getApple().getPosition().y*board.getScale(),
+                board.getScale(),
+                board.getScale()
         );
     }
 }

@@ -30,7 +30,6 @@ public class Snake {
     }
 
     public void move(boolean hasEaten){
-        //TODO: delete direction from this function and replace it with internal call
         Vector2D newHead = getHead().add(orientation.getUnitVector());
 
         body.addFirst(newHead);
