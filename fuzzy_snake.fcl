@@ -1,0 +1,59 @@
+FUNCTION_BLOCK
+
+VAR_INPUT
+przeszkoda_przod : REAL;
+przeszkoda_lewo : REAL;
+przeszkoda_prawo : REAL;
+END_VAR
+
+VAR_OUTPUT
+zmiana_kierunku : REAL;
+END_VAR
+
+FUZZIFY przeszkoda_przod
+TERM daleko := (0, 0) (10, 0) (20, 1);
+TERM srednio := (0, 0) (10, 1) (20, 0);
+TERM blisko := (0, 1) (10, 0) (20, 0);
+END_FUZZIFY
+
+FUZZIFY przeszkoda_lewo
+TERM daleko := (0, 0) (10, 0) (20, 1);
+TERM srednio := (0, 0) (10, 1) (20, 0);
+TERM blisko := (0, 1) (10, 0) (20, 0);
+END_FUZZIFY
+
+FUZZIFY przeszkoda_prawo
+TERM daleko := (0, 0) (10, 0) (20, 1);
+TERM srednio := (0, 0) (10, 1) (20, 0);
+TERM blisko := (0, 1) (10, 0) (20, 0);
+END_FUZZIFY
+
+DEFUZZIFY zmiana_kierunku
+TERM lewo := (0, 1) (1, 0) (2, 0);
+TERM zostaw := (0, 0) (1, 1) (2, 0);
+TERM prawo := (0, 0) (1, 0) (2, 1);
+METHOD : COG;
+DEFAULT := 1;
+END_DEFUZZIFY
+
+RULEBLOCK first
+AND: MIN;
+ACT: MIN;
+
+RULE 0: IF przeszkoda_przod IS blisko AND przeszkoda_prawo IS blisko AND przeszkoda_lewo IS daleko THEN zmiana_kierunku IS lewo;
+RULE 1: IF przeszkoda_przod IS blisko AND przeszkoda_prawo IS blisko AND przeszkoda_lewo IS srednio THEN zmiana_kierunku IS lewo;
+RULE 2: IF przeszkoda_przod IS blisko AND przeszkoda_prawo IS srednio AND przeszkoda_lewo IS daleko THEN zmiana_kierunku IS lewo;
+
+RULE 3: IF przeszkoda_przod IS blisko AND przeszkoda_prawo IS daleko AND przeszkoda_lewo IS blisko THEN zmiana_kierunku IS prawo;
+RULE 4: IF przeszkoda_przod IS blisko AND przeszkoda_prawo IS srednio AND przeszkoda_lewo IS blisko THEN zmiana_kierunku IS prawo;
+RULE 5: IF przeszkoda_przod IS blisko AND przeszkoda_prawo IS daleko AND przeszkoda_lewo IS srednio THEN zmiana_kierunku IS prawo;
+
+RULE 6: IF przeszkoda_przod IS srednio AND przeszkoda_prawo IS srednio AND przeszkoda_lewo IS srednio THEN zmiana_kierunku IS zostaw;
+RULE 7: IF przeszkoda_przod IS daleko AND przeszkoda_prawo IS daleko AND przeszkoda_lewo IS daleko THEN zmiana_kierunku IS zostaw;
+
+RULE 8: IF przeszkoda_przod IS blisko AND przeszkoda_prawo IS daleko AND przeszkoda_lewo IS daleko THEN zmiana_kierunku IS prawo;
+RULE 9: IF przeszkoda_przod IS blisko AND przeszkoda_prawo IS srednio AND przeszkoda_lewo IS srednio THEN zmiana_kierunku IS lewo;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

@@ -1,5 +1,7 @@
 package main.game;
 
+import main.game.fuzzy.FuzzyControler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
 
-public class Board implements ActionListener, KeyListener {
+public class Board extends Component implements ActionListener, KeyListener {
 
     private Vector2D upperLeft;
     private Vector2D lowerRight;
@@ -22,6 +24,8 @@ public class Board implements ActionListener, KeyListener {
     private Timer timer;
     private int speed;
     private int ticks;
+
+    private FuzzyControler fuzzyControler;
 
     Board(int width, int height, int scale, int wallElementsCount, int speed){
         this.upperLeft = new Vector2D(0,0);
@@ -37,9 +41,11 @@ public class Board implements ActionListener, KeyListener {
             generateObject('w');
         }
 
-        this.timer = new Timer(20,this);
+        this.timer = new Timer(200,this);
         this.ticks = 0;
         this.speed = speed;
+
+        this.fuzzyControler = new FuzzyControler(this);
     }
 
     public Apple getApple() {
@@ -122,12 +128,32 @@ public class Board implements ActionListener, KeyListener {
         gameFrame.addKeyListener(this);
     }
 
+
+    public int getSnakeDistanceFromObject(MapOrientation direction){
+        Vector2D check = (Vector2D) this.snake.getHead().clone();
+        int distance = 0;
+
+        do {
+            distance++;
+            check = check.add(direction.getUnitVector());
+        }while(this.validatePosition(check));
+
+        System.out.println("Distance from nearest object to the " + direction + " is " + distance);
+
+        return distance;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         gamePanel.repaint();
         ticks++;
 
         if(ticks%speed == 0){
+            int decision = this.fuzzyControler.getEvaluation();
+            if(decision != 0){
+                this.keyPressed(new KeyEvent(this, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, decision));
+            }
+
             if(validatePosition(snake.getHead().add(snake.getOrientation().getUnitVector()))){
                 snake.move(snakeEats());
             }
